@@ -1,0 +1,20 @@
+<h1> Insert Metrics </h1>
+
+<%= form_with model: @metric  do |form| %>
+  <% if form.object.errors.any? %>
+    <% form.object.errors.full_messages.each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  <% end %>
+  <div>
+    <%= form.label :time %>
+    <%= form.text :time %>
+  </div>
+
+  <div>
+    <%= form.label :distance %>
+    <%= form.text :distance%>
+  </div>
+
+  <%= form.button %>
+<% end %>
