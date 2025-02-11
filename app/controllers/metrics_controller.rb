@@ -1,6 +1,11 @@
 class MetricsController < ApplicationController
+  before_action :set_metric, except: [:index, :new, :create]
+  
   def index
     @metrics = Metrics.all
+  end
+
+  def show
   end
 
   def new
@@ -8,11 +13,9 @@ class MetricsController < ApplicationController
   end
   
   def edit
-    @metric = Metrics.find(params[:id])
   end
 
   def update
-    @metric = Metrics.find(params[:id])
     if @metric.update(metrics_params)
       redirect_to root_path
     else
@@ -30,7 +33,6 @@ class MetricsController < ApplicationController
   end
 
   def destroy 
-    @metric = Metrics.find(params[:id])
     @metric.destroy
     redirect_to root_path
   end
@@ -38,5 +40,11 @@ class MetricsController < ApplicationController
   private
     def metrics_params
       params.require(:metric).permit(:time, :distance)
+    end
+
+    def set_metric
+      @metric = Metrics.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+        redirect_to root_path
     end
 end
