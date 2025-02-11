@@ -1,4 +1,4 @@
 <div> Edit Metrics </div>
 <%= render partial: "form", locals: { metric: @metric }%>
 
-<%= button_to "Delete", @metric, method: :delete %>
+<%= button_to "Delete", @metric, method: :delete, data: { turbo_confirm: "Are you sure?" } %>

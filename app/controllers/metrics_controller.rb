@@ -29,6 +29,12 @@ class MetricsController < ApplicationController
     end
   end
 
+  def destroy 
+    @metric = Metrics.find(params[:id])
+    @metric.destroy
+    redirect_to root_path
+  end
+
   private
     def metrics_params
       params.require(:metric).permit(:time, :distance)
