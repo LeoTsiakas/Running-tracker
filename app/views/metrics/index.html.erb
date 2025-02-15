@@ -1,3 +1,8 @@
-<% @metrics.each do |metric| %>
-  <%= metric %>
-<% end %>
+<div class="flex flex-col flex-grow justify-center items-center">
+  <div>  Check your metrics! </div>
+  <div class="flex">
+    <% @metrics.each do |metric| %>
+      <%= metric %>
+    <% end %>
+  </div>
+</div>
