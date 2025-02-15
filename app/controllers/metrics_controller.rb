@@ -1,17 +1,17 @@
 class MetricsController < ApplicationController
-  before_action :set_metric, except: [:index, :new, :create]
-  
+  before_action :set_metric, except: %i[index new create]
+
   def index
-    @metrics = Metrics.all
+    @metrics = Metric.all
   end
 
   def show
   end
 
   def new
-    @metric = Metrics.new
+    @metric = Metric.new
   end
-  
+
   def edit
   end
 
@@ -24,7 +24,7 @@ class MetricsController < ApplicationController
   end
 
   def create
-    @metric = Metrics.new(metrics_params)
+    @metric = Metric.new(metrics_params)
     if @metric.save
       redirect_to root_path
     else
@@ -32,19 +32,20 @@ class MetricsController < ApplicationController
     end
   end
 
-  def destroy 
+  def destroy
     @metric.destroy
     redirect_to root_path
   end
 
   private
-    def metrics_params
-      params.require(:metric).permit(:time, :distance)
-    end
 
-    def set_metric
-      @metric = Metrics.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-        redirect_to root_path
-    end
+  def metrics_params
+    params.require(:metric).permit(:time, :distance)
+  end
+
+  def set_metric
+    @metric = Metric.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
+  end
 end
