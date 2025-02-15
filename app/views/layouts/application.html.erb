@@ -12,7 +12,18 @@
   </head>
 
   <body class="prose mx-auto min-h-screen">
-    <main class="container mx-auto px-5 flex justify-center items-center min-h-screen">
+    <main class="container mx-auto px-5 flex flex-col justify-center items-center min-h-screen">
+      
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      
+      <div>
+        <% if user_signed_in? %>
+          <%= link_to "Profile", edit_user_registration_path %>
+          <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+        <% end %>
+      </div>
+      
       <%= yield %>
     </main>
   </body>
