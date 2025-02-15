@@ -1,4 +1,4 @@
-<div class="flex flex-col min-h-screen justify-start gap-3">
+<div class="flex flex-col justify-start gap-3">
   <%= form_with model: metric  do |form| %>
     <% if form.object.errors.any? %>
       <% form.object.errors.full_messages.each do |msg| %>
@@ -16,7 +16,7 @@
         <%= form.text_field :distance, class: "border border-gray-300" %>
       </div>
       
-      <div class="rounded-sm shadow-lg text-center hover:scale-110 border border-gray-300">
+      <div class="rounded-sm shadow-lg text-center transition-transform hover:scale-110 border border-gray-300">
         <%= form.button %>
       </div>
     </div>

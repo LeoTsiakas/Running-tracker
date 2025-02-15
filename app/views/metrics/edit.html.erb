@@ -1,4 +1,9 @@
-<div> Edit Metrics </div>
-<%= render partial: "form", locals: { metric: @metric }%>
+<div class="flex flex-col justify-start items-center gap-7 min-h-screen mt-50">
+  <h2> Edit Metrics </h2>
 
-<%= button_to "Delete", @metric, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+  <%= render partial: "form", locals: { metric: @metric }%>
+
+  <div class="w-full rounded-sm shadow-lg text-center transition-transform hover:scale-110 border border-gray-300">
+    <%= button_to "Delete", @metric, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+  </div>
+</div>
