@@ -1,8 +1,8 @@
 <div class="flex flex-col flex-grow justify-center items-center">
-  <div>  Check your metrics! </div>
-  <div class="flex">
-    <% @metrics.each do |metric| %>
-      <%= metric %>
+  <div>Check your metrics!</div>
+  <div class="flex flex-wrap justify-between gap-4">
+    <% @metrics.ordered.each do |metric| %>
+      <%= render partial: 'metric', locals: { metric: metric } %>
     <% end %>
   </div>
 </div>
