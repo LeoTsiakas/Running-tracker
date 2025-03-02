@@ -7,13 +7,18 @@
     <% end %>
     <div class="flex flex-col gap-3">
       <div class="flex justify-between">
+        <%= form.label :date %>
+        <%= form.date_field :date, class: "border border-gray-300" %>
+      </div>
+
+      <div class="flex justify-between">
         <%= form.label :time %>
-        <%= form.text_field :time, class: "border border-gray-300" %>
+        <%= form.text_field :time, placeholder: "MM:SS", class: "border border-gray-300 pl-2" %>
       </div>
 
       <div class="flex justify-between">
         <%= form.label :distance %>
-        <%= form.text_field :distance, class: "border border-gray-300" %>
+        <%= form.text_field :distance, class: "border border-gray-300 pl-2" %>
       </div>
       
       <div class="rounded-sm shadow-lg text-center transition-transform hover:scale-110 border border-gray-300">
