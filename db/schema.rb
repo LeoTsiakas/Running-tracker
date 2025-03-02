@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_15_130248) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_16_133500) do
   create_table "metrics", force: :cascade do |t|
     t.string "time"
     t.integer "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date"
   end
 
   create_table "users", force: :cascade do |t|

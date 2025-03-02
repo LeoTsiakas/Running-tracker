@@ -1,0 +1,16 @@
+<div class="flex flex-col gap-3 p-6 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-110 w-64 h-40">
+  <div class="flex justify-between items-center">
+    <label for="date" class="mr-4">Date</label>
+    <span><%= metric.date.strftime("%Y-%m-%d") %></span>
+  </div>
+
+  <div class="flex justify-between items-center">
+    <label for="time" class="mr-4">Time</label>
+    <span><%= metric.time %></span>
+  </div>
+
+  <div class="flex justify-between items-center">
+    <label for="distance" class="mr-4">Distance</label>
+    <span><%= metric.distance %></span>
+  </div>
+</div>
