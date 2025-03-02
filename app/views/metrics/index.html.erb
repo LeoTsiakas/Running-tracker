@@ -2,7 +2,9 @@
   <div>Check your metrics!</div>
   <div class="flex flex-wrap justify-between gap-4">
     <% @metrics.ordered.each do |metric| %>
-      <%= render partial: 'metric', locals: { metric: metric } %>
+      <%= link_to metric_path(metric) do %>
+        <%= render partial: "metric", locals: { metric: metric } %>
+      <% end %>
     <% end %>
   </div>
 </div>
