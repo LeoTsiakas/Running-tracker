@@ -69,5 +69,3 @@ end
 gem "tailwindcss-rails", "~> 4.0"
 
 gem 'rubocop', '~> 1.71', require: false
-
-gem "devise", "~> 4.9"
