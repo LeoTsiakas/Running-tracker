@@ -1,7 +1,5 @@
 <div class="flex flex-col flex-grow justify-center items-center">
-  <% if @current_user %>
-    <div> Logged in as <%= @user.email %> </div>
-  <% end %>
+  <div> Logged in as <%= @user.email %> </div>
   <div>Check your metrics!</div>
   <div class="flex flex-wrap justify-between gap-4">
     <% @metrics.ordered.each do |metric| %>

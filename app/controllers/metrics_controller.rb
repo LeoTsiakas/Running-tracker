@@ -2,8 +2,8 @@ class MetricsController < ApplicationController
   before_action :set_metric, except: %i[index new create]
 
   def index
-    @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
-    @metrics = Metric.all
+    @user = User.find_by(id: session[:user_id]) if session[:user_id]
+    @metrics = @user.metrics if @user
   end
 
   def show
