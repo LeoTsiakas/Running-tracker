@@ -12,11 +12,11 @@
   </head>
 
   <body class="prose min-h-screen">
-    <%# <% if user_signed_in? %>
     <%= render partial: "shared/header" %>
-    <%# <% end %>
 
-    <p class="notice"><%= notice %></p>
+    <% if notice %>
+      <p class="w-[300px] mx-auto bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 text-center text-white"><%= notice %></p>
+    <% end %>
     <p class="alert"><%= alert %></p>
           
     <%= yield %>

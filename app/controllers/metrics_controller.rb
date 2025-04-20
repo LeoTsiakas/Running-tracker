@@ -1,4 +1,5 @@
 class MetricsController < ApplicationController
+  before_action :set_current_user
   before_action :set_metric, except: %i[index new create]
 
   def index
