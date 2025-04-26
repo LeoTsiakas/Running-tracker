@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-start items-center gap-2">
-    <h1>Sign up</h1>
+    <h1>Edit profile</h1>
 
-    <%= form_with model: @user, url: sign_up_path do |form| %>
+    <%= form_with model: @user, url: update_user_path(@user) do |form| %>
         <%= render partial: 'form', locals: { form: form }%>
     <% end %>
 </div>
