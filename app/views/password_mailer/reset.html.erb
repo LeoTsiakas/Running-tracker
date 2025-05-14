@@ -1,0 +1,10 @@
+<h1>Reset your password</h1>
+
+Someone requested a password reset for your account. If you did not make this request, please ignore this email.
+<p>
+  To reset your password, please click the link below:
+</p>
+
+<p>
+  <%= link_to 'Reset your password', reset_password_edit_url(token: @token) %>
+</p>
