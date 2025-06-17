@@ -20,5 +20,9 @@ Rails.application.routes.draw do
   get '/reset_password/edit', to: 'password_resets#edit'
   patch '/reset_password/edit', to: 'password_resets#update'
 
+  get 'api/v1/strava_authenticate', to: 'api/v1/authentication#authenticate', as: 'strava_authenticate'
+  get '/auth/strava/callback', to: 'api/v1/authentication#callback'
+  get '/auth/failure', to: 'api/v1/authentication#failure'
+
   delete '/logout', to: 'sessions#destroy'
 end
