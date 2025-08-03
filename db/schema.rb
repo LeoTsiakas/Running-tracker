@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_16_190002) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_17_184224) do
   create_table "metrics", force: :cascade do |t|
     t.string "time"
     t.integer "distance"
@@ -31,8 +31,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_16_190002) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "password_digest"
+    t.integer "strava_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["strava_id"], name: "index_users_on_strava_id", unique: true
   end
 
 end
