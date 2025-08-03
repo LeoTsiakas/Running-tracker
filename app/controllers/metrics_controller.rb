@@ -42,7 +42,7 @@ class MetricsController < ApplicationController
   private
 
   def metrics_params
-    params.require(:metric).permit(:time, :distance, :date)
+    params.require(:metric).permit(:time, :distance, :date, :user_id)
   end
 
   def set_metric

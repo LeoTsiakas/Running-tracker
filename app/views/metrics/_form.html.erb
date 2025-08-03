@@ -20,6 +20,10 @@
         <%= form.label :distance %>
         <%= form.text_field :distance, class: "border border-gray-300 pl-2" %>
       </div>
+
+      <div>
+        <%= form.hidden_field :user_id, value: Current.user.id %>
+      </div>
       
       <div class="rounded-sm shadow-lg text-center transition-transform hover:scale-110 border border-gray-300">
         <%= form.button %>
