@@ -1,4 +1,5 @@
 class Api::V1::AuthenticationController < ApplicationController
+  before_action :set_current_user
   def authenticate
     # Check if this is the first time the user tries to log in through strava
     # # use strava_id for this purpose
@@ -18,7 +19,7 @@ class Api::V1::AuthenticationController < ApplicationController
     if params[:error].present?
       redirect_to sign_in_path, status: :unprocessable_entity, alert: 'Authorization failed. Please try again.'
     end
-    # check params[:error] here to check if user has given required permissions
+
     response = strava_client.oauth_token(code: params[:code])
 
     if Time.now > Time.at(response.expires_at)
@@ -32,6 +33,7 @@ class Api::V1::AuthenticationController < ApplicationController
     strava_refresh_token = response.refresh_token
     strava_athlete = response.athlete
     strava_id = strava_athlete.id
+    binding.pry
 
     update_user_strava_id(strava_id) if Current.user.strava_id.blank?
   end
