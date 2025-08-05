@@ -3,7 +3,7 @@ class Api::V1::AuthenticationController < ApplicationController
 
   def start
     redirect_to strava_client.authorize_url(
-      redirect_uri: api_v1_authentication_callback_url,
+      redirect_uri: api_v1_auth_strava_callback_url,
       approval_prompt: 'force',
       response_type: 'code',
       scope: 'activity:read_all',
@@ -20,7 +20,7 @@ class Api::V1::AuthenticationController < ApplicationController
 
     update_user_strava_id(response.athlete.id) if Current.user.strava_id.blank?
 
-    sync_user_activities(response)
+    Api::V1::ActivitiesController.new(response)
   end
 
   private
@@ -44,12 +44,5 @@ class Api::V1::AuthenticationController < ApplicationController
 
   def update_user_strava_id(strava_id)
     Current.user.update(strava_id: strava_id)
-  end
-
-  def sync_user_activities(response)
-    fetch_athlete_activities(response.access_token)
-    update_athlete_activities(Current.user)
-
-    redirect_to root_path, notice: 'Strava data synced!'
   end
 end
