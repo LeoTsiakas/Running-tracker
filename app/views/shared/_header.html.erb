@@ -1,7 +1,7 @@
 <div class="flex justify-around w-full py-5 sticky top-0 bg-white border-b border-gray-300 shadow-lg">
   <% if Current.user %>
     <%= button_to "Log out", logout_path, method: :delete %>
-    <%= link_to 'Fetch your Strava data', strava_authenticate_path, class: "bg-orange-400 rounded-md p-2 text-center text-white transition-transform transform hover:scale-110" %>
+    <%= link_to 'Fetch your Strava data', api_v1_strava_authenticate_path, class: "bg-orange-400 rounded-md p-2 text-center text-white transition-transform transform hover:scale-110" %>
     <%= link_to 'Add activity', new_metric_path, class: "bg-blue-400 rounded-md p-2 text-center text-white transition-transform transform hover:scale-110" %>
     <%= link_to "Profile", edit_user_path(Current.user.id) %>
   <% else %>
