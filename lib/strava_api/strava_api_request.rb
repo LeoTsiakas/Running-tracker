@@ -4,13 +4,13 @@ module StravaApi
     end
 
     def authorize
-      redirect_to strava_client.authorize_url(
-        redirect_uri: api_v1_auth_strava_callback_url,
+      strava_client.authorize_url(
+        redirect_uri: 'http://localhost:3000/api/v1/auth/strava/callback',
         approval_prompt: 'force',
         response_type: 'code',
         scope: 'activity:read_all',
         state: 'magic'
-      ), allow_other_host: true
+      )
     end
 
     def strava_client

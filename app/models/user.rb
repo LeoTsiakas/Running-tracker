@@ -9,7 +9,7 @@ class User < ApplicationRecord
     metrics.each_with_object({}) { |m, h| h[m.date.utc] = m }
   end
 
-  def update_user_strava_id(strava_id)
+  def update_strava_id(strava_id)
     update(strava_id: strava_id)
   end
 
