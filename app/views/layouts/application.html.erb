@@ -11,13 +11,16 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="prose flex flex-col justify-between items-center min-h-screen">
-    <% if user_signed_in? %>
-      <%= render partial: "shared/header" %>
+  <body class="prose min-h-screen">
+    <%= render partial: "shared/header" %>
+
+    <% if notice %>
+      <p class="w-[300px] mx-auto bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 text-center text-white"><%= notice %></p>
     <% end %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if alert %>
+      <p class="w-[300px] mx-auto bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 text-center text-white"><%= alert %></p>
+    <% end %>
           
     <%= yield %>
   </body>

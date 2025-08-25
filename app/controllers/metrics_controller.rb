@@ -1,9 +1,10 @@
 class MetricsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_current_user
   before_action :set_metric, except: %i[index new create]
 
   def index
-    @metrics = Metric.all
+    @user = User.find_by(id: session[:user_id]) if session[:user_id]
+    @metrics = @user.metrics if @user
   end
 
   def show
@@ -41,7 +42,7 @@ class MetricsController < ApplicationController
   private
 
   def metrics_params
-    params.require(:metric).permit(:time, :distance, :date)
+    params.require(:metric).permit(:time, :distance, :date, :user_id)
   end
 
   def set_metric

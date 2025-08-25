@@ -1,10 +1,13 @@
-<div class="flex flex-col flex-grow justify-center items-center">
-  <div>Check your metrics!</div>
-  <div class="flex flex-wrap justify-between gap-4">
-    <% @metrics.ordered.each do |metric| %>
-      <%= link_to metric_path(metric) do %>
-        <%= render partial: "metric", locals: { metric: metric } %>
+<div class="flex flex-col gap-3 flex-grow justify-center items-center">
+  <% if Current.user %>
+    <div> Logged in as <%= @user.email %> </div>
+    <div>Check your metrics!</div>
+    <div class="flex flex-wrap justify-between gap-4">
+      <% @metrics.ordered.each do |metric| %>
+        <%= link_to metric_path(metric) do %>
+          <%= render partial: "metric", locals: { metric: metric } %>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
