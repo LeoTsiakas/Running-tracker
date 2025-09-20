@@ -24,15 +24,19 @@ module StravaApi
       response = strava_client.oauth_token(code: code)
       return response unless Time.now > Time.at(response.expires_at)
 
-      strava_client.oauth_token(
-        refresh_token: response.refresh_token,
-        grant_type: 'refresh_token'
-      )
+      refresh_access_token(response.refresh_token)
     end
 
     def fetch_athlete_activities(access_token)
       client = Strava::Api::Client.new(access_token: access_token)
       client.athlete_activities.collection
+    end
+
+    def refresh_access_token(refresh_token)
+      strava_client.oauth_token(
+        refresh_token: refresh_token,
+        grant_type: 'refresh_token'
+      )
     end
   end
 end
