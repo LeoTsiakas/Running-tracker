@@ -12,6 +12,8 @@ class Api::V1::AuthenticationController < ApplicationController
 
     response = strava_api.fetch_access_token(params[:code])
 
+    binding.pry
+
     Current.user.update_strava_id(response.athlete.id) if Current.user.strava_id.blank?
 
     athlete_activities = strava_api.fetch_athlete_activities(response.access_token)
