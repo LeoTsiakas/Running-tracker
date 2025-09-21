@@ -1,0 +1,7 @@
+# config/sidekiq.yml
+
+:scheduler:
+  :schedule:
+    strava_sync:
+      cron: '0 * * * * *'
+      class: 'Strava::SyncerJob'
