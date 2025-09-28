@@ -21,8 +21,10 @@ class Api::V1::AuthenticationController < ApplicationController
   end
 
   def callback
-    if params[:error].present?
-      return redirect_to sign_in_path, status: :unprocessable_entity, alert: 'Authorization failed. Please try again.'
+    if params[:error].present? || (["activity:read", "activity:read_all"]&params[:scope].split(",")).empty?
+      redirect_to root_path, alert: 'Activities sync failed. Please make sure you authorized our app to access
+                                     your Strava data.'
+      return
     end
 
     response = strava_api.fetch_access_token(params[:code])
