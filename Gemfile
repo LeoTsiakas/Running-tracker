@@ -83,3 +83,7 @@ gem "sidekiq", "~> 8.0"
 gem 'whenever', '~> 1.0'
 
 gem 'sidekiq-scheduler', '~> 6.0', '>= 6.0.1'
+
+gem "sentry-ruby"
+gem "sentry-rails"
+gem "sentry-sidekiq"
