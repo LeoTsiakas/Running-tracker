@@ -3,5 +3,5 @@
 :scheduler:
   :schedule:
     strava_sync:
-      cron: '0 * * * * *'
+      cron: '*/5 * * * *'
       class: 'Strava::SyncerJob'

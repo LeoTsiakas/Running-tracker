@@ -18,6 +18,7 @@ class Strava::UserSyncJob
 
       update_user_metrics(user, user.strava_access_token, strava_api)
     end
+    
     puts "Strava activities synced"
   end
 
