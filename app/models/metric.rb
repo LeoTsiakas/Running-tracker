@@ -1,5 +1,6 @@
 class Metric < ApplicationRecord
   validates :time, :distance, :date, presence: true
+  validates :distance, numericality: { greater_than: 0 }
   validate :date_cannot_be_in_the_future
 
   belongs_to :user
