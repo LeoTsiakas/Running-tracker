@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :unauthenticated_access_only, only: %i[new]
+
   def new
     @user = User.new
   end
