@@ -9,4 +9,11 @@ class ApplicationController < ActionController::Base
     flash[:alert] = 'You must be logged in to access this section'
     redirect_to sign_in_path
   end
+
+  def unauthenticated_access_only
+    if Current.user
+      redirect_to root_path
+      flash[:alert] = 'You already have an account' 
+    end
+  end
 end

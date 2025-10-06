@@ -1,6 +1,7 @@
 class MetricsController < ApplicationController
   before_action :set_current_user
   before_action :set_metric, except: %i[index new create]
+  before_action :require_user_logged_in
 
   def index
     @user = User.find_by(id: session[:user_id]) if session[:user_id]

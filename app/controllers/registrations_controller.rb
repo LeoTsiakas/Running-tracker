@@ -1,6 +1,8 @@
 class RegistrationsController < ApplicationController
   before_action :set_current_user
   before_action :require_user_logged_in, only: %i[edit update]
+  before_action :unauthenticated_access_only, only: %i[new]
+  
   def new
     @user = User.new
   end
