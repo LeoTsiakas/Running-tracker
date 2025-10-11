@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true,
+                    uniqueness: true,
+                    format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email" }
 
   has_many :metrics, dependent: :destroy
 
