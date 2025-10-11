@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_12_175330) do
+ActiveRecord::Schema[7.1].define(version: 2025_10_05_203936) do
   create_table "metrics", force: :cascade do |t|
-    t.string "time"
+    t.integer "time", null: false
     t.integer "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "date", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.integer "user_id"
+    t.datetime "date", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id"], name: "index_metrics_on_user_id"
   end
 

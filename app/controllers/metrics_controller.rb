@@ -42,7 +42,15 @@ class MetricsController < ApplicationController
   private
 
   def metrics_params
-    params.require(:metric).permit(:time, :distance, :date, :user_id)
+    binding.pry
+    permitted = params.require(:metric).permit(:distance, :date, :user_id)
+    if params[:metric][:duration_hours] && params[:metric][:duration_minutes] && params[:metric][:duration_seconds]
+      hours = params[:metric][:duration_hours]
+      minutes = params[:metric][:duration_minutes]
+      seconds = params[:metric][:duration_seconds]
+    end
+    permitted[:time] = hours * 3600 + minutes * 60 + seconds
+    permitted
   end
 
   def set_metric

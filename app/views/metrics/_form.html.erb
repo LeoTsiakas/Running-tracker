@@ -12,8 +12,10 @@
       </div>
 
       <div class="flex justify-between">
-        <%= form.label :time %>
-        <%= form.text_field :time, placeholder: "MM:SS", class: "border border-gray-300 pl-2" %>
+        <%= form.label :time, "Duration" %>
+        <%= select_tag "metric[duration_hours]", options_for_select((0..23).to_a, 0) %>hr
+        <%= select_tag "metric[duration_minutes]", options_for_select((0..59).to_a, 0) %>m
+        <%= select_tag "metric[duration_seconds]", options_for_select((0..59).to_a, 0) %>s
       </div>
 
       <div class="flex justify-between">

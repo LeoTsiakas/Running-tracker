@@ -6,7 +6,7 @@
 
   <div class="flex justify-between items-center">
     <label for="time" class="mr-4">Time</label>
-    <span><%= metric.time %></span>
+    <span><%= Time.at(metric.time).utc.strftime("%H:%M:%S") %></span>
   </div>
 
   <div class="flex justify-between items-center">
