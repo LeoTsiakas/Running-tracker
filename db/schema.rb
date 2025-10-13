@@ -10,34 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_20_093208) do
-  create_table "metrics", force: :cascade do |t|
-    t.integer "time", null: false
-    t.float "distance"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.datetime "date", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["user_id"], name: "index_metrics_on_user_id"
+ActiveRecord::Schema[7.1].define(version: 20_251_012_191_853) do
+  create_table 'metrics', force: :cascade do |t|
+    t.integer 'time', null: false
+    t.integer 'distance'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'user_id'
+    t.datetime 'date', default: -> { 'CURRENT_TIMESTAMP' }, null: false
+    t.index ['user_id'], name: 'index_metrics_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "password_digest"
-    t.integer "strava_id"
-    t.string "strava_access_token"
-    t.string "strava_refresh_token"
-    t.datetime "strava_expires_at"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["strava_id"], name: "index_users_on_strava_id", unique: true
+  create_table 'users', force: :cascade do |t|
+    t.string 'username'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.string 'password_digest'
+    t.integer 'strava_id'
+    t.string 'strava_access_token'
+    t.string 'strava_refresh_token'
+    t.datetime 'strava_expires_at'
+    t.string 'time_zone'
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+    t.index ['strava_id'], name: 'index_users_on_strava_id', unique: true
   end
-
 end
