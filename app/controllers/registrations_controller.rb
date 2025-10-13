@@ -8,6 +8,8 @@ class RegistrationsController < ApplicationController
   def create
     @user = User.new(users_params)
 
+    set_time_zone(@user)
+
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path, notice: 'Successfully created account'
@@ -33,6 +35,11 @@ class RegistrationsController < ApplicationController
   private
 
   def users_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :time_zone)
+  end
+
+  def set_time_zone(user)
+    time_zone = params.dig(:user, :time_zone)
+    user.time_zone = ActiveSupport::TimeZone::MAPPING.key(time_zone) if time_zone.present?
   end
 end

@@ -9,17 +9,18 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://cdn.jsdelivr.net/npm/jstimezonedetect@1.0.7/dist/jstz.min.js"></script>
   </head>
 
   <body class="prose min-h-screen">
     <%= render partial: "shared/header" %>
 
     <% if notice %>
-      <p class="w-[300px] mx-auto bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 text-center text-white"><%= notice %></p>
+      <p class="w-[300px] mx-auto bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 text-center text-black"><%= notice %></p>
     <% end %>
 
     <% if alert %>
-      <p class="w-[300px] mx-auto bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 text-center text-white"><%= alert %></p>
+      <p class="w-[300px] mx-auto bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 text-center text-black"><%= alert %></p>
     <% end %>
           
     <%= yield %>
