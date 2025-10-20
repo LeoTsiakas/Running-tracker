@@ -76,3 +76,5 @@ gem 'rubocop', '~> 1.71', require: false
 gem 'strava-ruby-client', '~> 2.2'
 
 gem 'httparty', '~> 0.23.1'
+
+gem 'draper', '~> 4.0', '>= 4.0.4'
