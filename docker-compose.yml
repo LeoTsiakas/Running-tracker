@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  web:
+    command: >
+      sh -c "bin/rails db:setup && bin/rails server -b 0.0.0.0 -p 3000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      SECRET_KEY_BASE: dev-secret-key
+      FORCE_SSL: "false"
+      RAILS_ENV: production
