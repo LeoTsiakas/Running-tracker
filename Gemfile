@@ -78,3 +78,12 @@ gem 'strava-ruby-client', '~> 2.2'
 gem 'httparty', '~> 0.23.1'
 
 gem 'draper', '~> 4.0', '>= 4.0.4'
+gem "sidekiq", "~> 8.0"
+
+gem 'whenever', '~> 1.0'
+
+gem 'sidekiq-scheduler', '~> 6.0', '>= 6.0.1'
+
+gem "sentry-ruby"
+gem "sentry-rails"
+gem "sentry-sidekiq"

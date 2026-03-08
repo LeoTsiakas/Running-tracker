@@ -9,10 +9,6 @@ class User < ApplicationRecord
     metrics.each_with_object({}) { |m, h| h[m.date.utc] = m }
   end
 
-  def update_strava_id(strava_id)
-    update(strava_id: strava_id)
-  end
-
   def update_athlete_activities(activities)
     activities.each do |row|
       time = (row.elapsed_time / 60.0).round(2).to_s.gsub('.', ':')
