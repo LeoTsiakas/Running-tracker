@@ -1,5 +1,5 @@
 <% if @user.errors.any? %>
-    <div class="bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 text-center text-white">
+    <div class="bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 text-center text-black">
         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
         <%= @user.errors.full_messages.each do |message| %>
             <div><%= message %></div>
@@ -8,6 +8,8 @@
 <% end %>
 
 <div class="flex flex-col justify-start items-center gap-2">
+    <%= form.hidden_field :time_zone, value: nil %>
+    
     <div class="field">
         <%= form.label :email %><br>
         <%= form.email_field :email, class: "border-solid border-1 border-gray-300 rounded-md", placeholder: "johndoe@gmail.com" %>
@@ -23,7 +25,7 @@
         <%= form.password_field :password_confirmation, class: "border-solid border-1 border-gray-300 rounded-md", placeholder: "Confirm password" %>
     </div>
     
-    <div class="bg-blue-400 rounded-md p-2 text-center text-white">
+    <div class="bg-blue-400 rounded-md p-2 text-center text-black">
         <%= form.button %>
     </div>
 </div>
