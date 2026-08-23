@@ -1,19 +1,10 @@
 class ApplicationController < ActionController::Base
-  def set_current_user
-    Current.user = User.find_by(id: session[:user_id]) if session[:user_id]
-  end
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def require_user_logged_in
-    return if Current.user
+  protected
 
-    flash[:alert] = 'You must be logged in to access this section'
-    redirect_to sign_in_path
-  end
-
-  def unauthenticated_access_only
-    if Current.user
-      redirect_to root_path
-      flash[:alert] = 'You already have an account' 
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:time_zone])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:time_zone])
   end
 end

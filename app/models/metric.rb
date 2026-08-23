@@ -12,7 +12,9 @@ class Metric < ApplicationRecord
   private
 
   def date_cannot_be_in_the_future
-    Time.use_zone(Current.user.time_zone) do
+    return if date.blank?
+
+    Time.use_zone(user&.time_zone.presence || Time.zone.name) do
       local_date = Time.zone.local(date.year, date.month, date.day, date.hour, date.min, date.sec)
       errors.add(:date, "can't be in the future") if local_date > Time.current
     end

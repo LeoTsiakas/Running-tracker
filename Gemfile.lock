@@ -113,6 +113,12 @@ GEM
     debug (1.10.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    devise (4.9.4)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     draper (4.0.4)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -191,6 +197,7 @@ GEM
     nio4r (2.7.4)
     nokogiri (1.18.2-x86_64-linux-gnu)
       racc (~> 1.4)
+    orm_adapter (0.5.0)
     parallel (1.26.3)
     parser (3.3.7.1)
       ast (~> 2.4.1)
@@ -262,6 +269,9 @@ GEM
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
+    responders (3.2.0)
+      actionpack (>= 7.0)
+      railties (>= 7.0)
     rexml (3.4.0)
     rubocop (1.71.2)
       json (~> 2.3)
@@ -336,6 +346,8 @@ GEM
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
     uri (1.0.3)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -360,6 +372,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  devise (~> 4.9)
   draper (~> 4.0, >= 4.0.4)
   httparty (~> 0.23.1)
   importmap-rails
