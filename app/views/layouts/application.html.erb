@@ -1,16 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RunningTracker</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <%= Sentry.get_trace_propagation_meta.html_safe %>
-    <script src="https://cdn.jsdelivr.net/npm/jstimezonedetect@1.0.7/dist/jstz.min.js"></script>
+    <%= render "shared/head" %>
   </head>
 
   <body>

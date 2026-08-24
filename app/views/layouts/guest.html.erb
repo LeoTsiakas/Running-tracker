@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <%= render "shared/head" %>
+   </head>
+
+  <body>
+    <div class="relative min-h-screen flex flex-col justify-center items-center px-4">
+       <%= image_tag "login_banner.webp", alt: "Login Banner", class: "absolute inset-0 h-full w-full object-cover" %>
+       <div class="absolute inset-0 bg-black/40"></div>
+
+       <div class="relative z-10 w-full max-w-md bg-white rounded-md shadow-xl p-8">
+         <%= yield %>
+       </div>
+     </div>
+  </body>
+</html>
