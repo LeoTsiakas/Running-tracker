@@ -1,11 +1,10 @@
 class User < ApplicationRecord
-  has_secure_password
-
-  validates :email, presence: true,
-                    uniqueness: true,
-                    format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email" }
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable,
+         omniauth_providers: [:google_oauth2]
 
   has_many :metrics, dependent: :destroy
+
+  before_validation :normalize_time_zone
 
   def metrics_by_registered_at
     metrics.each_with_object({}) { |m, h| h[m.date.utc] = m }
@@ -27,5 +26,36 @@ class User < ApplicationRecord
 
       activity.save
     end
+  end
+
+  def self.from_omniauth(auth)
+    user = find_by(provider: auth.provider, uid: auth.uid)
+    return user if user
+
+    return nil unless auth.info.email.present? && auth.extra.raw_info.email_verified
+
+    user = find_or_initialize_by(email: auth.info.email)
+    user.assign_attributes(provider: auth.provider, uid: auth.uid)
+
+    if user.new_record?
+      user.username  = auth.info.name
+      user.time_zone = 'UTC'
+      user.password  = Devise.friendly_token(32)
+    end
+
+    user.save ? user : nil
+  end
+
+  private
+
+  # The forms submit the browser's IANA identifier ("Europe/Athens"). Store the
+  # ActiveSupport name ("Athens") so the zone is always spelled one way. MAPPING.key
+  # is nil for a name that's already converted, hence the fallback.
+  def normalize_time_zone
+    self.time_zone = if time_zone.blank?
+                       nil
+                     else
+                       ActiveSupport::TimeZone::MAPPING.key(time_zone) || time_zone
+                     end
   end
 end
