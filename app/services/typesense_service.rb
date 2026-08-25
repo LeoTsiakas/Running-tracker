@@ -17,6 +17,10 @@ class TypesenseService
       TYPESENSE_CLIENT.collections['metrics'].retrieve
     end
 
+    def delete_schema
+      TYPESENSE_CLIENT.collections['metrics'].delete
+    end
+
     def export_documents
       TYPESENSE_CLIENT.collections['metrics'].documents.export
     end
@@ -26,19 +30,45 @@ class TypesenseService
     end
 
     def index_metric(metric)
-      TYPESENSE_CLIENT.collections['metrics'].documents.create(
-        {
-          id: metric.id.to_s,
-          user_id: metric.user_id.to_i,
-          time: metric.time.to_i,
-          distance: metric.distance.to_f,
-          date: metric.date.to_i
-        }
+      TYPESENSE_CLIENT.collections['metrics'].documents.create(document_for(metric))
+    end
+
+    def update_metric(metric)
+      TYPESENSE_CLIENT.collections['metrics'].documents[metric.id.to_s].update(
+        document_for(metric).except(:id)
       )
+    end
+
+    def delete_metric(metric)
+      TYPESENSE_CLIENT.collections['metrics'].documents[metric.id.to_s].delete
+    end
+
+    def search_metrics(query, options = {})
+      search_params = {
+        q: query,
+        query_by: 'user_id,time,distance,date',
+        sort_by: 'date:desc',
+        per_page: options[:per_page] || 10,
+        page: options[:page] || 1
+      }
+
+      TYPESENSE_CLIENT.collections['metrics'].documents.search(search_params)
     end
 
     def documents_count
       get_schema['num_documents']
+    end
+
+    private
+
+    def document_for(metric)
+      {
+        id: metric.id.to_s,
+        user_id: metric.user_id.to_i,
+        time: metric.time.to_i,
+        distance: metric.distance.to_f,
+        date: metric.date.to_i
+      }
     end
   end
 end
