@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable,
+         omniauth_providers: [:google_oauth2]
 
   has_many :metrics, dependent: :destroy
 
@@ -25,6 +26,24 @@ class User < ApplicationRecord
 
       activity.save
     end
+  end
+
+  def self.from_omniauth(auth)
+    user = find_by(provider: auth.provider, uid: auth.uid)
+    return user if user
+
+    return nil unless auth.info.email.present? && auth.extra.raw_info.email_verified
+
+    user = find_or_initialize_by(email: auth.info.email)
+    user.assign_attributes(provider: auth.provider, uid: auth.uid)
+
+    if user.new_record?
+      user.username  = auth.info.name
+      user.time_zone = 'UTC'
+      user.password  = Devise.friendly_token(32)
+    end
+
+    user.save ? user : nil
   end
 
   private

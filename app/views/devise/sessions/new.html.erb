@@ -1,6 +1,8 @@
 <div class="flex flex-col justify-center items-center gap-2">
     <h1>Log In</h1>
 
+    <%= render "devise/shared/google_button" %>
+
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |form| %>
         <div class="flex flex-col justify-start items-center gap-2 w-72">
             <div class="w-full flex flex-col items-start gap-2">

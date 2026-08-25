@@ -1,0 +1,16 @@
+<div class="w-72 flex flex-col gap-2">
+  <div class="absolute top-[70px] left-[90px] z-10">
+    <%= render partial: "shared/google_icon" %>
+  </div>
+
+  <%= button_to "Sign in with Google",
+              user_google_oauth2_omniauth_authorize_path,
+              data: { turbo: false },
+              class: "w-full bg-white rounded-md p-2 text-center text-gray-800 cursor-pointer" %>
+
+  <div class="flex items-center gap-2 text-xs text-white">
+    <div class="flex-grow border-t border-white"></div>
+    <span>or</span>
+    <div class="flex-grow border-t border-white"></div>
+  </div>
+</div>

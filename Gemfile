@@ -33,6 +33,8 @@ gem 'jbuilder'
 # gem "kredis"
 
 gem 'devise', '~> 4.9'
+gem 'omniauth-google-oauth2', '~> 1.1'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
