@@ -90,3 +90,5 @@ gem 'sidekiq-scheduler', '~> 6.0', '>= 6.0.1'
 gem "sentry-ruby"
 gem "sentry-rails"
 gem "sentry-sidekiq"
+
+gem 'typesense'
