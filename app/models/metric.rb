@@ -9,6 +9,18 @@ class Metric < ApplicationRecord
 
   scope :ordered, -> { order(date: :asc) }
 
+  after_create_commit do
+    TypesenseService.index_metric(self)
+  end
+
+  after_update_commit do
+    TypesenseService.update_metric(self)
+  end
+
+  after_destroy_commit do
+    TypesenseService.delete_metric(self)
+  end
+
   private
 
   def date_cannot_be_in_the_future
