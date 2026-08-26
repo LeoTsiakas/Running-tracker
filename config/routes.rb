@@ -1,7 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :metrics
+  resources :metrics do
+    get 'search', on: :collection
+  end
 
   root 'metrics#index'
 
