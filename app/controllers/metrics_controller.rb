@@ -38,6 +38,20 @@ class MetricsController < ApplicationController
     redirect_to root_path
   end
 
+  def search_by_date
+    date_range = params[:selected_date_range]
+
+    @metrics = if date_range.present?
+                 results = TypesenseService.search_metrics_by_date(current_user, date_range)
+                 ids = results['hits'].map { |hit| hit['document']['id'] }
+                 current_user.metrics.where(id: ids)
+               else
+                 current_user.metrics
+               end
+
+    render :index
+  end
+
   private
 
   def metrics_params

@@ -2,7 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   resources :metrics do
-    get 'search', on: :collection
+    get 'search_by_date', on: :collection
   end
 
   root 'metrics#index'

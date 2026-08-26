@@ -30,7 +30,7 @@ class TypesenseService
     end
 
     def index_metric(metric)
-      TYPESENSE_CLIENT.collections['metrics'].documents.create(document_for(metric))
+      TYPESENSE_CLIENT.collections['metrics'].documents.upsert(document_for(metric))
     end
 
     def update_metric(metric)
@@ -43,16 +43,17 @@ class TypesenseService
       TYPESENSE_CLIENT.collections['metrics'].documents[metric.id.to_s].delete
     end
 
-    def search_metrics(query, options = {})
-      search_params = {
-        q: query,
-        query_by: 'user_id,time,distance,date',
-        sort_by: 'date:desc',
-        per_page: options[:per_page] || 10,
-        page: options[:page] || 1
-      }
+    def search_metrics_by_date(user, range, options = {})
+      start_at, end_at = parse_date_range(range, user)
+      return { 'hits' => [] } if start_at.nil? || end_at.nil?
 
-      TYPESENSE_CLIENT.collections['metrics'].documents.search(search_params)
+      TYPESENSE_CLIENT.collections['metrics'].documents.search(
+        q: '*',
+        filter_by: "user_id:=#{user.id} && date:[#{start_at.to_i}..#{end_at.to_i}]",
+        sort_by: 'date:desc',
+        per_page: options[:per_page] || 250,
+        page: options[:page] || 1
+      )
     end
 
     def documents_count
@@ -69,6 +70,30 @@ class TypesenseService
         distance: metric.distance.to_f,
         date: metric.date.to_i
       }
+    end
+
+    def parse_date_range(range, user)
+      from, to = range.to_s.split(' - ').map(&:strip)
+
+      Time.use_zone(zone_for(user)) do
+        start_at = parse_time(from)
+        end_at = parse_time(to)
+        [start_at&.beginning_of_day, end_at&.end_of_day]
+      end
+    end
+
+    def zone_for(user)
+      user&.time_zone.presence || Time.zone.name
+    end
+
+    def parse_time(value)
+      return if value.blank?
+
+      begin
+        Time.zone.strptime(value, '%m/%d/%Y')
+      rescue ArgumentError
+        Time.zone.parse(value)
+      end
     end
   end
 end
