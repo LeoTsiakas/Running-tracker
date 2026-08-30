@@ -1,6 +1,13 @@
 <!-- datarangepicker does not exist in the npm registry, so we are using a CDN instead -->
 <script src="https://cdn.jsdelivr.net/gh/alumuko/vanilla-datetimerange-picker@latest/dist/vanilla-datetimerange-picker.js"></script>
 
+<%= form_with url: search_by_date_metrics_path, method: :get do |form| %>
+  <div class="flex items-center gap-4">
+    <%= form.text_field :selected_date_range, value: params[:selected_date_range], data: { controller: "daterangepicker" } %>
+    <%= form.submit "Filter" %>
+  </div>
+<% end %>
+
 <div class="flex flex-col gap-3 flex-grow justify-center items-center">
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
     <% @metrics.ordered.each do |metric| %>
