@@ -1,6 +1,6 @@
 class MetricsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_metric, except: %i[index new create]
+  before_action :set_metric, only: %i[show edit update destroy]
 
   def index
     @metrics = current_user.metrics
