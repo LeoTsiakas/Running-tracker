@@ -73,17 +73,13 @@ class TypesenseService
     end
 
     def parse_date_range(range, user)
-      from, to = range.to_s.split(' - ').map(&:strip)
+      start_at, end_at = range.split(' - ')
 
-      Time.use_zone(zone_for(user)) do
-        start_at = parse_time(from)
-        end_at = parse_time(to)
-        [start_at&.beginning_of_day, end_at&.end_of_day]
-      end
+      Time.use_zone(zone_for(user)) { [parse_time(start_at), parse_time(end_at)] }
     end
 
     def zone_for(user)
-      user&.time_zone.presence || Time.zone.name
+      user.time_zone || Time.zone.name
     end
 
     def parse_time(value)
@@ -92,7 +88,7 @@ class TypesenseService
       begin
         Time.zone.strptime(value, '%m/%d/%Y')
       rescue ArgumentError
-        Time.zone.parse(value)
+        nil
       end
     end
   end
