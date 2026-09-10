@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   before_validation :normalize_time_zone
 
+  validates :time_zone, presence: true
+
   def metrics_by_registered_at
     metrics.each_with_object({}) { |m, h| h[m.date.utc] = m }
   end
