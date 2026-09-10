@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_09_10_210055) do
+ActiveRecord::Schema[7.1].define(version: 2026_09_10_211758) do
   create_table "metrics", force: :cascade do |t|
     t.integer "time", null: false
     t.float "distance", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_09_10_210055) do
     t.string "strava_access_token"
     t.string "strava_refresh_token"
     t.datetime "strava_expires_at"
-    t.string "time_zone", null: false
+    t.string "time_zone", default: "UTC", null: false
     t.string "provider"
     t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
