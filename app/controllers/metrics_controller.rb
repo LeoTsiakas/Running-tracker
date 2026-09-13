@@ -3,7 +3,32 @@ class MetricsController < ApplicationController
   before_action :set_metric, only: %i[show edit update destroy]
 
   def index
-    @metrics = current_user.metrics
+    date_range = params[:selected_date_range]
+
+    if params[:selected_date_range].present?
+      start_at, end_at = DateParser.parse_date_range(date_range, current_user)
+
+      @metrics = Metric.search('*', '', {
+                                 filter_by: "user_id:=#{current_user.id} && date:[#{start_at.to_i}..#{end_at.to_i}]",
+                                 sort_by: 'date:desc',
+                                 per_page: params[:per_page] || 250,
+                                 page: params[:page] || 1
+                               })
+    else
+      @metrics = Metric.search('*', '', {
+                                 filter_by: "user_id:=#{current_user.id}",
+                                 sort_by: 'date:desc',
+                                 per_page: params[:per_page] || 250,
+                                 page: params[:page] || 1
+                               })
+    end
+  end
+
+  def show
+  end
+
+  def new
+    @metric = current_user.metrics.new
   end
 
   def show
@@ -36,20 +61,6 @@ class MetricsController < ApplicationController
   def destroy
     @metric.destroy
     redirect_to root_path
-  end
-
-  def search_by_date
-    date_range = params[:selected_date_range]
-
-    @metrics = if date_range.present?
-                 results = TypesenseService.search_metrics_by_date(current_user, date_range)
-                 ids = results['hits'].map { |hit| hit['document']['id'] }
-                 current_user.metrics.where(id: ids)
-               else
-                 current_user.metrics
-               end
-
-    render :index
   end
 
   private

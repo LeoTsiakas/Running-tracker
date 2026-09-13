@@ -91,4 +91,4 @@ gem "sentry-ruby"
 gem "sentry-rails"
 gem "sentry-sidekiq"
 
-gem 'typesense'
+gem 'typesense-rails', '>= 1.0.0.rc8'
