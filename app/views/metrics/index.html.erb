@@ -1,9 +1,18 @@
-<div class="flex flex-col gap-3 flex-grow justify-center items-center">
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
-    <% @metrics.ordered.each do |metric| %>
-      <%= link_to metric_path(metric) do %>
-        <%= render partial: "metric", locals: { metric: metric } %>
-      <% end %>
-    <% end %>
+<!-- datarangepicker does not exist in the npm registry, so we are using a CDN instead -->
+<script src="https://cdn.jsdelivr.net/gh/alumuko/vanilla-datetimerange-picker@latest/dist/vanilla-datetimerange-picker.js"></script>
+
+<%= form_with url: metrics_path, method: :get do |form| %>
+  <div class="flex flex-wrap items-center gap-3">
+    <%= form.text_field :selected_date_range,
+                        value: params[:selected_date_range],
+                        placeholder: "Pick a date range",
+                        class: "min-w-64 flex-1 rounded-md border border-gray-300 bg-white px-3 py-2 text-black",
+                        data: { controller: "daterangepicker" } %>
+    <%= form.submit "Filter",
+                    class: "cursor-pointer rounded-md bg-blue-400 px-4 py-2 text-black transition-transform hover:scale-110" %>
   </div>
+<% end %>
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
+  <%= render @metrics %>
 </div>

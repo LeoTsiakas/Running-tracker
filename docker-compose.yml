@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   web:
     command: >
@@ -13,3 +11,14 @@ services:
       SECRET_KEY_BASE: dev-secret-key
       FORCE_SSL: "false"
       RAILS_ENV: production
+
+  typesense:
+    image: typesense/typesense:30.2
+    ports:
+      - "8108:8108"
+    volumes:
+      - typesense-data:/data
+    command: '--data-dir /data --api-key=devkey --enable-cors'
+
+volumes:
+  typesense-data:

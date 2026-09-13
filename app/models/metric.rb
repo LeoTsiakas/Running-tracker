@@ -1,4 +1,20 @@
 class Metric < ApplicationRecord
+  include Typesense
+
+  typesense do
+    attributes :user_id, :time, :distance
+    attribute(:date) { date.to_i }
+
+    default_sorting_field :date
+
+    predefined_fields [
+      { name: 'user_id', type: 'int32' },
+      { name: 'time', type: 'int32' },
+      { name: 'distance', type: 'float' },
+      { name: 'date', type: 'int64' }
+    ]
+  end
+
   validates :time, :distance, :date, presence: true
   validates :distance, numericality: { greater_than: 0 }
   validate :date_cannot_be_in_the_future

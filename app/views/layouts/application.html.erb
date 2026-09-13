@@ -7,14 +7,20 @@
   <body>
     <%= render partial: "shared/header" %>
 
-    <% if notice.present? %>
-      <p class="w-[300px] mx-auto bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 text-center text-black"><%= notice %></p>
-    <% end %>
+    <div class="relative min-h-screen flex flex-col justify-center items-center px-4">
+      <%= image_tag "login_banner.webp", alt: "Login Banner", class: "absolute inset-0 h-full w-full object-cover" %>
+      <div class="absolute inset-0 bg-black/40"></div>
 
-    <% if alert.present? %>
-      <p class="w-[300px] mx-auto bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 text-center text-black"><%= alert %></p>
-    <% end %>
-          
-    <%= yield %>
+      <div class="relative z-10 w-full flex flex-col items-center bg-black opacity-80 text-white shadow-xl p-4">
+        <% if notice.present? %>
+          <p class="w-full bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 mb-3 text-center text-black"><%= notice %></p>
+        <% end %>
+
+        <% if alert.present? %>
+          <p class="w-full bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 mb-3 text-center text-black"><%= alert %></p>
+        <% end %>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
