@@ -96,3 +96,7 @@ gem "sentry-sidekiq"
 gem 'typesense-rails', '>= 1.0.0.rc8'
 
 gem "pagy", "~> 43.4"
+
+gem "chartkick", "~> 5.2"
+
+gem "groupdate", "~> 6.7"

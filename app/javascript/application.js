@@ -3,6 +3,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import moment from "moment"
 window.moment = moment
+import "chartkick"
+import "Chart.bundle"
 
 // Fill the hidden time zone field on the sign up / edit profile forms with the
 // browser's zone. Listens for turbo:load so it also runs on Turbo navigations.
