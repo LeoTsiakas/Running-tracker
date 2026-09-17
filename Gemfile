@@ -92,3 +92,5 @@ gem "sentry-rails"
 gem "sentry-sidekiq"
 
 gem 'typesense-rails', '>= 1.0.0.rc8'
+
+gem "pagy", "~> 43.4"

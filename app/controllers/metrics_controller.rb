@@ -8,20 +8,22 @@ class MetricsController < ApplicationController
     if params[:selected_date_range].present?
       start_at, end_at = DateParser.parse_date_range(date_range, current_user)
 
-      @metrics = Metric.search('*', '', {
-                                 filter_by: "user_id:=#{current_user.id} && date:[#{start_at.to_i}..#{end_at.to_i}]",
-                                 sort_by: 'date:desc',
-                                 per_page: params[:per_page] || 250,
-                                 page: params[:page] || 1
-                               })
+      search = Metric.search('*', '', {
+                               filter_by: "user_id:=#{current_user.id} && date:[#{start_at.to_i}..#{end_at.to_i}]",
+                               sort_by: 'date:desc',
+                               per_page: params[:per_page] || 250
+                             })
+
     else
-      @metrics = Metric.search('*', '', {
-                                 filter_by: "user_id:=#{current_user.id}",
-                                 sort_by: 'date:desc',
-                                 per_page: params[:per_page] || 250,
-                                 page: params[:page] || 1
-                               })
+      search = Metric.search('*', '', {
+                               filter_by: "user_id:=#{current_user.id}",
+                               sort_by: 'date:desc',
+                               per_page: params[:per_page] || 250
+                             })
+
     end
+
+    @pagy, @metrics = pagy(search)
   end
 
   def show
