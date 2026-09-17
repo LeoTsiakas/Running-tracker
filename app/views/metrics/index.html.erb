@@ -13,6 +13,16 @@
   </div>
 <% end %>
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 bg-black opacity-80 p-5 mt-5 rounded-md">
   <%= render @metrics %>
+</div>
+
+<div class="bg-white w-full">
+  <% if params[:selected_date_range].present? %>
+    <% start_date, end_date = DateParser.parse_date_range(params[:selected_date_range], current_user) %>
+  <% end %>
+
+  <% range = start_date..end_date || "" %>
+
+  <%= area_chart current_user.metrics.group_by_day(:date, range: start_date..end_date).sum(:time) %>
 </div>

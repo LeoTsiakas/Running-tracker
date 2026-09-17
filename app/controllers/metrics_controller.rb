@@ -22,6 +22,11 @@ class MetricsController < ApplicationController
                                  page: params[:page] || 1
                                })
     end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @metrics }
+    end
   end
 
   def show
