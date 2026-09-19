@@ -13,6 +13,12 @@
   </div>
 <% end %>
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 bg-black opacity-80 p-5 mt-5 rounded-md">
   <%= render @metrics %>
 </div>
+
+<div class="bg-white w-full">
+  <%= area_chart @metrics.group_by_day { |metric| metric.date }.to_h { |k, metrics| [k, metrics.map { |metric| metric.time }.sum] },
+    xtitle: "Date", ytitle: "Time" %>
+</div>
+
