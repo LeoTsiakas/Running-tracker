@@ -17,9 +17,22 @@
   <%= render @metrics %>
 </div>
 
-<div class="bg-white w-full">
-  <%= area_chart build_chart_data(@metrics, :time), xtitle: "Date", ytitle: "Time" %>
+<div data-controller="chart" class="flex flex-col justify-center items-center gap-4 mb-4">
+  <button data-action="click->chart#openTimeChart" class="bg-blue-400 p-4 rounded-md text-white hover:scale-110">
+    Time
+  </button>
 
-  <%= area_chart build_chart_data(@metrics, :distance), xtitle: "Date", ytitle: "Distance" %>
+  <button data-action="click->chart#openDistanceChart" class="bg-orange-400 p-4 rounded-md text-white hover:scale-110">
+    Distance
+  </button>
+
+  <div class="bg-white w-full">
+    <div data-chart-target="timeChart">
+      <%= area_chart build_chart_data(@metrics, :time), xtitle: "Date", ytitle: "Time" %>
+    </div>
+
+    <div data-chart-target="distanceChart" class="hidden">
+      <%= area_chart build_chart_data(@metrics, :distance), xtitle: "Date", ytitle: "Distance" %>
+    </div>
+  </div>
 </div>
-
