@@ -29,3 +29,9 @@
     <%= render "shared/pagy_nav", pagy: @pagy, frame_id: "metrics_page" if @pagy.pages > 1 %>
   </div>
 <% end %>
+
+<div class="bg-white w-full">
+  <%= area_chart @metrics.group_by_day { |metric| metric.date }.to_h { |k, metrics| [k, metrics.map { |metric| metric.time }.sum] },
+    xtitle: "Date", ytitle: "Time" %>
+</div>
+
