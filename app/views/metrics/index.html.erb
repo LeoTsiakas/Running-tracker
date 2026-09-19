@@ -18,11 +18,7 @@
 </div>
 
 <div class="bg-white w-full">
-  <% if params[:selected_date_range].present? %>
-    <% start_date, end_date = DateParser.parse_date_range(params[:selected_date_range], current_user) %>
-  <% end %>
-
-  <% range = start_date..end_date || "" %>
-
-  <%= area_chart current_user.metrics.group_by_day(:date, range: start_date..end_date).sum(:time) %>
+  <%= area_chart @metrics.group_by_day { |metric| metric.date }.to_h { |k, metrics| [k, metrics.map { |metric| metric.time }.sum] },
+    xtitle: "Date", ytitle: "Time" %>
 </div>
+
