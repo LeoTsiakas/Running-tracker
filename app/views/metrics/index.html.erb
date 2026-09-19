@@ -18,7 +18,8 @@
 </div>
 
 <div class="bg-white w-full">
-  <%= area_chart @metrics.group_by_day { |metric| metric.date }.to_h { |k, metrics| [k, metrics.map { |metric| metric.time }.sum] },
-    xtitle: "Date", ytitle: "Time" %>
+  <%= area_chart build_chart_data(@metrics, :time), xtitle: "Date", ytitle: "Time" %>
+
+  <%= area_chart build_chart_data(@metrics, :distance), xtitle: "Date", ytitle: "Distance" %>
 </div>
 
