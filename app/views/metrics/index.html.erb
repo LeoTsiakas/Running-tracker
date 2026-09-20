@@ -26,13 +26,13 @@
     Distance
   </button>
 
-  <div class="bg-white w-full">
+  <div class="bg-white w-full rounded-md p-4">
     <div data-chart-target="timeChart">
-      <%= area_chart build_chart_data(@metrics, :time), xtitle: "Date", ytitle: "Time" %>
+      <%= line_chart build_chart_data(@metrics, :time), xtitle: "Date", ytitle: "Time", colors: ["#60a5fa"] %>
     </div>
 
     <div data-chart-target="distanceChart" class="hidden">
-      <%= area_chart build_chart_data(@metrics, :distance), xtitle: "Date", ytitle: "Distance" %>
+      <%= line_chart build_chart_data(@metrics, :distance), xtitle: "Date", ytitle: "Distance", colors: ["#fb923c"] %>
     </div>
   </div>
 </div>
