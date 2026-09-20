@@ -13,11 +13,11 @@
   </div>
 <% end %>
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 bg-black opacity-80 p-5 mt-5 rounded-md">
+<div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 bg-black opacity-80 p-5 mt-5 rounded-md">
   <%= render @metrics %>
 </div>
 
-<div data-controller="chart" class="flex flex-col justify-center items-center gap-4 mb-4">
+<div data-controller="chart" class="flex flex-col justify-center items-center gap-4 mb-4 w-full">
   <button data-action="click->chart#openTimeChart" class="bg-blue-400 p-4 rounded-md text-white hover:scale-110">
     Time
   </button>
