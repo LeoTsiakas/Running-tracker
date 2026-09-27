@@ -18,9 +18,14 @@
   </div>
 <% end %>
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
-  <%= render @metrics %>
-</div>
+<%= turbo_frame_tag "metrics_page" do %>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
+    <%= render @metrics %>
+  </div>
 
-<%== @pagy.series_nav if @pagy.pages > 1 %>
+  <div class="w-full flex flex-col items-center justify-center mt-3 gap-2">
+    <%= render "shared/pagy_info", pagy: @pagy %>
 
+    <%= render "shared/pagy_nav", pagy: @pagy, frame_id: "metrics_page" if @pagy.pages > 1 %>
+  </div>
+<% end %>
