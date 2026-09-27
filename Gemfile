@@ -59,6 +59,8 @@ group :development do
   gem 'pry-rails'
   gem 'web-console'
 
+  gem 'hotwire-livereload'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
