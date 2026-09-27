@@ -26,18 +26,11 @@ class MetricsController < ApplicationController
     @pagy, @metrics = pagy(search)
   end
 
-  def show
-  end
-
   def new
     @metric = current_user.metrics.new
   end
 
   def show
-  end
-
-  def new
-    @metric = current_user.metrics.new
   end
 
   def edit
