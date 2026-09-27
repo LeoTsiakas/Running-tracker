@@ -1,0 +1,21 @@
+<% frame_id = local_assigns.fetch(:frame_id, nil)
+  page_key = local_assigns.fetch(:page_key, pagy.options[:page_key] || "page")
+  limit_key = local_assigns.fetch(:limit_key, pagy.options[:limit_key] || "limit")
+  preserve_params = local_assigns.fetch(:preserve_params, {}).stringify_keys.except(page_key.to_s, limit_key.to_s)
+  wrapper_class = local_assigns.fetch(:wrapper_class, "inline-flex items-center gap-2 text-sm font-medium")
+
+  # Build query string with preserved params and current limit
+  query_params = preserve_params.dup
+  query_params[limit_key] = pagy.limit.to_s
+
+  anchor_string = frame_id.present? ? "data-turbo-frame='#{frame_id}' data-turbo-action='advance'" : nil
+
+  nav_html = pagy.series_nav(
+    anchor_string: anchor_string,
+    querify: ->(q) { q.merge!(query_params) }
+  )
+%>
+
+<div class="<%= wrapper_class %>">
+  <%= nav_html.html_safe %>
+</div>

@@ -1,4 +1,5 @@
 class Metric < ApplicationRecord
+  extend Pagy::Search
   include Typesense
 
   typesense do
