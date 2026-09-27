@@ -23,6 +23,11 @@ class MetricsController < ApplicationController
 
     end
 
+    respond_to do |format|
+      format.html
+      format.json { render json: @metrics }
+    end
+
     @pagy, @metrics = pagy(search)
   end
 

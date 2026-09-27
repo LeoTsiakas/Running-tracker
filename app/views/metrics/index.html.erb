@@ -20,7 +20,7 @@
 
 <%= turbo_frame_tag "metrics_page" do %>
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
-    <%= render @metrics %>
+    <%= render @pagy_metrics %>
   </div>
 
   <div class="w-full flex flex-col items-center justify-center mt-3 gap-2">
@@ -30,22 +30,9 @@
   </div>
 <% end %>
 
-<div data-controller="chart" class="flex flex-col justify-center items-center gap-4 mb-4 w-full">
-  <button data-action="click->chart#openTimeChart" class="bg-blue-400 p-4 rounded-md text-white hover:scale-110">
-    Time
-  </button>
+Check Your Charts
 
-  <button data-action="click->chart#openDistanceChart" class="bg-orange-400 p-4 rounded-md text-white hover:scale-110">
-    Distance
-  </button>
-
-  <div class="bg-white w-full rounded-md p-4">
-    <div data-chart-target="timeChart">
-      <%= line_chart build_chart_data(@metrics, :time), xtitle: "Date", ytitle: "Time", colors: ["#60a5fa"] %>
-    </div>
-
-    <div data-chart-target="distanceChart" class="hidden">
-      <%= line_chart build_chart_data(@metrics, :distance), xtitle: "Date", ytitle: "Distance", colors: ["#fb923c"] %>
-    </div>
-  </div>
+<div data-controller="bar-chart" data-bar-chart-metrics-value="<%= @metrics.to_json %>" class="flex flex-col gap-4 w-full max-w-[84rem] rounded-md mt-3">
+  <canvas data-bar-chart-target="timeCanvas" class="bg-white p-4 rounded-md"></canvas>
+  <canvas data-bar-chart-target="distanceCanvas" class="bg-white p-4 rounded-md"></canvas>
 </div>
