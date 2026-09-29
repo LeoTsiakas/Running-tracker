@@ -28,7 +28,7 @@ class MetricsController < ApplicationController
       format.json { render json: @metrics }
     end
 
-    @pagy, @metrics = pagy(search)
+    @pagy, @pagy_metrics, @metrics = pagy(search) << search
   end
 
   def new
