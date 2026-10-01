@@ -10,14 +10,14 @@ class MetricsController < ApplicationController
 
       search = Metric.search('*', '', {
                                filter_by: "user_id:=#{current_user.id} && date:[#{start_at.to_i}..#{end_at.to_i}]",
-                               sort_by: 'date:desc',
+                               sort_by: 'date:asc',
                                per_page: params[:per_page] || 250
                              })
 
     else
       search = Metric.search('*', '', {
                                filter_by: "user_id:=#{current_user.id}",
-                               sort_by: 'date:desc',
+                               sort_by: 'date:asc',
                                per_page: params[:per_page] || 250
                              })
 
