@@ -8,14 +8,14 @@
     <div class="flex flex-col gap-3">
       <div class="flex justify-between">
         <%= form.label :date %>
-        <%= form.datetime_field :date, class: "border border-gray-300", max: Time.current.strftime("%Y-%m-%dT%H:%M") %>
+        <%= form.datetime_field :date, class: "border border-gray-300 [color-scheme:dark]", max: Time.current.strftime("%Y-%m-%dT%H:%M") %>
       </div>
 
       <div class="flex justify-between">
         <%= form.label :time, "Duration" %>
-        <%= select_tag "metric[duration_hours]", options_for_select((0..23).to_a, 0) , class: "border-1 border-solid" %>hr
-        <%= select_tag "metric[duration_minutes]", options_for_select((0..59).to_a, 0), class: "border-1 border-solid" %>m
-        <%= select_tag "metric[duration_seconds]", options_for_select((0..59).to_a, 0), class: "border-1 border-solid" %>s
+        <%= select_tag "metric[duration_hours]", options_for_select((0..23).to_a, 0) , class: "border-1 border-solid *:text-black" %>hr
+        <%= select_tag "metric[duration_minutes]", options_for_select((0..59).to_a, 0), class: "border-1 border-solid *:text-black" %>m
+        <%= select_tag "metric[duration_seconds]", options_for_select((0..59).to_a, 0), class: "border-1 border-solid *:text-black" %>s
       </div>
 
       <div class="flex justify-between">
