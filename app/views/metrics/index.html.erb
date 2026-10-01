@@ -32,7 +32,14 @@
 
 Check Your Charts
 
+<% chart_wrapper_class = "relative h-80 w-full bg-white p-4 rounded-md" %>
+
 <div data-controller="bar-chart" data-bar-chart-metrics-value="<%= @metrics.to_json %>" class="flex flex-col gap-4 w-full max-w-[84rem] rounded-md mt-3">
-  <canvas data-bar-chart-target="timeCanvas" class="bg-white p-4 rounded-md"></canvas>
-  <canvas data-bar-chart-target="distanceCanvas" class="bg-white p-4 rounded-md"></canvas>
+  <div class="<%= chart_wrapper_class %>">
+    <canvas data-bar-chart-target="timeCanvas"></canvas>
+  </div>
+
+  <div class="<%= chart_wrapper_class %>">
+    <canvas data-bar-chart-target="distanceCanvas"></canvas>
+  </div>
 </div>

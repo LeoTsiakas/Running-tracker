@@ -34,6 +34,10 @@ export default class extends Controller {
             backgroundColor: color
           }
         ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
       }
     })
   }
