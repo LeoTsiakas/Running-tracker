@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-start gap-3">
+<div class="card border border-accent p-6 flex flex-col justify-start gap-3">
   <%= form_with model: metric  do |form| %>
     <% if form.object.errors.any? %>
       <% form.object.errors.full_messages.each do |msg| %>
@@ -8,24 +8,22 @@
     <div class="flex flex-col gap-3">
       <div class="flex justify-between">
         <%= form.label :date %>
-        <%= form.datetime_field :date, class: "border border-gray-300 [color-scheme:dark]", max: Time.current.strftime("%Y-%m-%dT%H:%M") %>
+        <%= form.datetime_field :date, class: "input-accent px-2", max: Time.current.strftime("%Y-%m-%dT%H:%M") %>
       </div>
 
       <div class="flex justify-between">
         <%= form.label :time, "Duration" %>
-        <%= select_tag "metric[duration_hours]", options_for_select((0..23).to_a, 0) , class: "border-1 border-solid *:text-black" %>hr
-        <%= select_tag "metric[duration_minutes]", options_for_select((0..59).to_a, 0), class: "border-1 border-solid *:text-black" %>m
-        <%= select_tag "metric[duration_seconds]", options_for_select((0..59).to_a, 0), class: "border-1 border-solid *:text-black" %>s
+        <%= select_tag "metric[duration_hours]", options_for_select((0..23).to_a, 0) , class: "input-accent" %>hr
+        <%= select_tag "metric[duration_minutes]", options_for_select((0..59).to_a, 0), class: "input-accent" %>m
+        <%= select_tag "metric[duration_seconds]", options_for_select((0..59).to_a, 0), class: "input-accent" %>s
       </div>
 
       <div class="flex justify-between">
         <%= form.label :distance %>
-        <%= form.text_field :distance, class: "border border-gray-300 pl-2" %>
+        <%= form.text_field :distance, class: "input-accent pl-2" %>
       </div>
 
-      <div class="rounded-sm shadow-lg text-center transition-transform hover:scale-110 border border-gray-300">
-        <%= form.button %>
-      </div>
+      <%= form.button class: "btn-accent w-full shadow-lg" %>
     </div>
   <% end %>
 </div>

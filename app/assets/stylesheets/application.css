@@ -16,6 +16,11 @@
 
  @import url('https://cdn.jsdelivr.net/gh/alumuko/vanilla-datetimerange-picker@latest/dist/vanilla-datetimerange-picker.css');
 
+/* The picker uses `color: inherit` on a white popup, so it would pick up the body's white text */
+.daterangepicker {
+  color: var(--color-brand);
+}
+
  .pagy {
   --spacing: 0.15rem;
   --padding: 0.7rem;
@@ -25,14 +30,14 @@
   --font-weight: 500;
   --line-height: 1.6;
 
-  /* light (tailwind neutral) */
-  --text: #171717; /* neutral-900 */
-  --text-hover: #0a0a0a; /* neutral-950 */
-  --text-current: #fafafa; /* neutral-50 */
-  --background: #fafafa; /* neutral-50 */
-  --background-hover: #f5f5f5; /* neutral-100 */
-  --background-current: #171717; /* neutral-900 */
-  --background-input: #ffffff;
+  /* app theme (variables come from @theme in app/assets/tailwind/application.css) */
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-current: var(--color-brand);
+  --background: var(--color-brand-surface);
+  --background-hover: var(--color-brand);
+  --background-current: var(--color-accent);
+  --background-input: var(--color-brand);
 
   color: var(--text);
   font-size: var(--font-size);
@@ -60,7 +65,7 @@
   text-decoration: none;
   background-color: var(--background);
   padding: 0.25rem;
-  border: var(--border-width) solid #e5e5e5; /* neutral-200 */
+  border: var(--border-width) solid var(--color-accent);
   border-radius: var(--rounding);
   color: inherit;
 }
@@ -106,11 +111,11 @@
 }
 
 .pagy a[aria-label="Previous"]::before {
-  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' stroke='currentColor'%3E%3Cpolyline points='7.75 1.75 3.5 6 7.75 10.25'%3E%3C/polyline%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' stroke='%23ffffff'%3E%3Cpolyline points='7.75 1.75 3.5 6 7.75 10.25'%3E%3C/polyline%3E%3C/g%3E%3C/svg%3E");
 }
 
 .pagy a[aria-label="Next"]::before {
-  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' stroke='currentColor'%3E%3Cpolyline points='4.25 10.25 8.5 6 4.25 1.75'%3E%3C/polyline%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' stroke='%23ffffff'%3E%3Cpolyline points='4.25 10.25 8.5 6 4.25 1.75'%3E%3C/polyline%3E%3C/g%3E%3C/svg%3E");
 }
 
 .pagy [role="separator"] {

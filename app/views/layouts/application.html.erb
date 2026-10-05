@@ -4,19 +4,17 @@
     <%= render "shared/head" %>
   </head>
 
-  <body>
+  <body class="bg-brand text-white">
     <%= render partial: "shared/header" %>
 
-    <div class="relative min-h-screen flex flex-col justify-center items-center">
-      <%= image_tag "login_banner.webp", alt: "Login Banner", class: "absolute inset-0 h-full w-full object-cover" %>
-
-      <div class="relative z-10 w-full flex flex-col gap-2 items-center bg-black/80 text-white shadow-xl p-4">
+    <div class="min-h-screen flex flex-col justify-center items-center">
+      <div class="w-full flex flex-col gap-2 items-center p-4">
         <% if notice.present? %>
-          <p class="w-full bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 mb-3 text-center text-black"><%= notice %></p>
+          <p class="bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 mb-3 text-center text-black"><%= notice %></p>
         <% end %>
 
         <% if alert.present? %>
-          <p class="w-full bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 mb-3 text-center text-black"><%= alert %></p>
+          <p class="bg-red-300 border-solid border-2 border-red-400 rounded-md p-2 mb-3 text-center text-black"><%= alert %></p>
         <% end %>
         <%= yield %>
       </div>

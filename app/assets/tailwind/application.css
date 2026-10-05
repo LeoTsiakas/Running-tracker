@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+@theme static {
+  --color-brand: #071925;
+  --color-brand-surface: #10293b;
+  --color-accent: #e64a00;
+}
+
+/* Tailwind v4 resets buttons to the browser's default cursor; make every clickable element show a pointer */
+@layer base {
+  a[href],
+  button:not(:disabled),
+  input:where([type="submit"], [type="button"], [type="reset"]):not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility card {
+  @apply rounded-xl bg-brand-surface text-white;
+}
+
+@utility btn-accent {
+  @apply rounded-md bg-accent px-4 py-2 text-center font-medium text-brand transition-transform hover:scale-105;
+}
+
+@utility input-accent {
+  @apply rounded-md border border-accent bg-brand text-white placeholder:text-neutral-400 [color-scheme:dark];
+}

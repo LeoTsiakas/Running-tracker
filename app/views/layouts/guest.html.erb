@@ -4,12 +4,11 @@
      <%= render "shared/head" %>
    </head>
 
-  <body>
-    <div class="relative min-h-screen flex flex-col justify-center items-center px-4">
-      <%= image_tag "login_banner.webp", alt: "Login Banner", class: "absolute inset-0 h-full w-full object-cover" %>
-      <div class="absolute inset-0 bg-black/40"></div>
+  <body class="bg-brand text-white">
+    <div class="min-h-screen flex flex-col justify-center items-center gap-8 px-4">
+      <%= image_tag "logo.png", alt: "RunningTracker", class: "h-14 w-auto" %>
 
-      <div class="relative z-10 w-full max-w-md bg-black/80 text-white shadow-xl pb-8">
+      <div class="card border border-accent w-full max-w-md shadow-xl pb-8">
         <% if notice.present? %>
           <p class="w-full bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 mb-3 text-center text-black"><%= notice %></p>
         <% end %>
