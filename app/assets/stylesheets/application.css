@@ -18,7 +18,7 @@
 
 /* The picker uses `color: inherit` on a white popup, so it would pick up the body's white text */
 .daterangepicker {
-  color: var(--color-brand);
+  color: var(--color-running-tracker-blue-900);
 }
 
  .pagy {
@@ -33,11 +33,11 @@
   /* app theme (variables come from @theme in app/assets/tailwind/application.css) */
   --text: #ffffff;
   --text-hover: #ffffff;
-  --text-current: var(--color-brand);
-  --background: var(--color-brand-surface);
-  --background-hover: var(--color-brand);
-  --background-current: var(--color-accent);
-  --background-input: var(--color-brand);
+  --text-current: var(--color-running-tracker-blue-900);
+  --background: var(--color-running-tracker-blue-800);
+  --background-hover: var(--color-running-tracker-blue-900);
+  --background-current: var(--color-running-tracker-orange);
+  --background-input: var(--color-running-tracker-blue-900);
 
   color: var(--text);
   font-size: var(--font-size);
@@ -65,7 +65,7 @@
   text-decoration: none;
   background-color: var(--background);
   padding: 0.25rem;
-  border: var(--border-width) solid var(--color-accent);
+  border: var(--border-width) solid var(--color-running-tracker-orange);
   border-radius: var(--rounding);
   color: inherit;
 }

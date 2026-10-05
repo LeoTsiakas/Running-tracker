@@ -4,11 +4,11 @@
      <%= render "shared/head" %>
    </head>
 
-  <body class="bg-brand text-white">
+  <body class="bg-running-tracker-blue-900 text-white">
     <div class="min-h-screen flex flex-col justify-center items-center gap-8 px-4">
       <%= image_tag "logo.png", alt: "RunningTracker", class: "h-14 w-auto" %>
 
-      <div class="card border border-accent w-full max-w-md shadow-xl pb-8">
+      <div class="card border border-running-tracker-orange w-full max-w-md shadow-xl pb-8">
         <% if notice.present? %>
           <p class="w-full bg-green-400 border-solid border-2 border-green-500 rounded-md p-2 mb-3 text-center text-black"><%= notice %></p>
         <% end %>
