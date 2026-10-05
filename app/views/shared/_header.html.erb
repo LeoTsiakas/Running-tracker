@@ -1,10 +1,10 @@
-<div class="flex items-center w-full px-8 py-5 sticky top-0 z-10 bg-brand-surface text-white border-b border-accent shadow-lg">
+<div class="flex flex-col md:flex-row gap-8 md:gap-0 items-center w-full px-8 py-5 sticky top-0 z-10 bg-running-tracker-blue-800 text-white border-b border-running-tracker-orange shadow-lg">
   <%= link_to root_path do %>
     <%= image_tag "logo.png", alt: "RunningTracker", class: "h-10 w-auto" %>
   <% end %>
 
-  <nav class="ml-auto flex items-center gap-8">
-    <%= link_to 'Fetch your Strava data', api_v1_strava_authenticate_path %>
+  <nav class="ml-auto flex items-start md:items-center gap-8 text-xs md:text-base">
+    <%= link_to 'Fetch Strava data', api_v1_strava_authenticate_path %>
     <%= link_to 'Add activity', new_metric_path %>
     <%= link_to "Profile", edit_user_registration_path %>
     <%= button_to "Log out", destroy_user_session_path, method: :delete %>

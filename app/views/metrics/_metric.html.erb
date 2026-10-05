@@ -1,7 +1,10 @@
 <div class="card flex flex-col justify-between gap-3 p-6 border border-running-tracker-orange shadow-xs overflow-hidden transition-transform transform hover:scale-110">
   <div class="flex justify-between items-center max-w-xl text-sm">
     <label for="date" class="mr-4">Date:</label>
-    <span><%= metric.date.strftime("%Y-%m-%d %H:%M") %></span>
+    <span>
+      <%= metric.date.strftime("%Y-%m-%d") %>
+      <span class="hidden md:inline"><%= metric.date.strftime("%H:%M") %></span>
+    </span>
   </div>
 
   <div class="flex justify-between items-center max-w-xl text-sm">
