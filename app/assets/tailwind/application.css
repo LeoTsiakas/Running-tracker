@@ -4,6 +4,7 @@
   --color-running-tracker-blue-900: #071925;
   --color-running-tracker-blue-800: #10293b;
   --color-running-tracker-orange: #e64a00;
+  --font-display: "Oswald", sans-serif;
 }
 
 @layer base {
