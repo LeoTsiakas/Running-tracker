@@ -21,7 +21,7 @@
 }
 
 @utility btn-accent {
-  @apply rounded-md bg-running-tracker-orange px-4 py-2 text-center font-medium text-running-tracker-blue-900 transition-transform hover:scale-105;
+  @apply rounded-md bg-running-tracker-orange px-4 py-2 text-center font-medium text-running-tracker-blue-800 transition-transform hover:scale-105;
 }
 
 @utility input-accent {
