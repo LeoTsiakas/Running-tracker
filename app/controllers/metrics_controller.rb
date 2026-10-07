@@ -1,6 +1,6 @@
 class MetricsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_metric, only: %i[show edit update destroy]
+  before_action :set_metric, only: %i[destroy]
 
   def index
     date_range = params[:selected_date_range]
@@ -10,14 +10,14 @@ class MetricsController < ApplicationController
 
       search = Metric.search('*', '', {
                                filter_by: "user_id:=#{current_user.id} && date:[#{start_at.to_i}..#{end_at.to_i}]",
-                               sort_by: 'date:desc',
+                               sort_by: 'date:asc',
                                per_page: params[:per_page] || 250
                              })
 
     else
       search = Metric.search('*', '', {
                                filter_by: "user_id:=#{current_user.id}",
-                               sort_by: 'date:desc',
+                               sort_by: 'date:asc',
                                per_page: params[:per_page] || 250
                              })
 
@@ -33,20 +33,6 @@ class MetricsController < ApplicationController
 
   def new
     @metric = current_user.metrics.new
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-    if @metric.update(metrics_params)
-      redirect_to root_path
-    else
-      render :edit, status: :unprocessable_entity
-    end
   end
 
   def create

@@ -13,8 +13,8 @@ export default class extends Controller {
 
   connect() {
     this.charts = [
-      this.buildChart(this.timeCanvasTarget, "Time by Date", "time", "#60a5fa"),
-      this.buildChart(this.distanceCanvasTarget, "Distance by Date", "distance", "#fb923c")
+      this.buildChart(this.timeCanvasTarget, "Time(min) by Date", "time", "#60a5fa"),
+      this.buildChart(this.distanceCanvasTarget, "Distance(km) by Date", "distance", "#fb923c")
     ]
   }
 
@@ -34,6 +34,23 @@ export default class extends Controller {
             backgroundColor: color
           }
         ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            ticks: {
+              callback: (value) => {
+                if (attribute === "time") {
+                  return this.secondsToMinutes(value)
+                } else {
+                  return value
+                }
+              }
+            }
+          }
+        }
       }
     })
   }
@@ -42,5 +59,10 @@ export default class extends Controller {
     return this.metricsValue.map(metric =>
       new Date(metric.date).toLocaleDateString(undefined, { day: "numeric", month: "short" })
     )
+  }
+
+  secondsToMinutes(value) {
+    const minutes = Math.floor(value / 60)
+    return `${minutes.toString().padStart(2, "0")}`
   }
 }

@@ -1,31 +1,36 @@
-<div class="flex flex-col justify-start gap-3">
-  <%= form_with model: metric  do |form| %>
-    <% if form.object.errors.any? %>
-      <% form.object.errors.full_messages.each do |msg| %>
-        <div><%= msg %></div>
-      <% end %>
+<%= form_with model: metric  do |form| %>
+  <% if form.object.errors.any? %>
+    <% form.object.errors.full_messages.each do |msg| %>
+      <div><%= msg %></div>
     <% end %>
-    <div class="flex flex-col gap-3">
-      <div class="flex justify-between">
+  <% end %>
+  <div class="flex flex-col gap-8">
+    <% input_classes = "flex flex-row lg:flex-col justify-between gap-3" %>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <div class= "<%= input_classes %>" >
         <%= form.label :date %>
-        <%= form.datetime_field :date, class: "border border-gray-300", max: Time.current.strftime("%Y-%m-%dT%H:%M") %>
+        <%= form.datetime_field :date, class: "input-accent px-2", max: Time.current.strftime("%Y-%m-%dT%H:%M") %>
       </div>
 
-      <div class="flex justify-between">
+      <div class= "<%= input_classes %>" >
         <%= form.label :time, "Duration" %>
-        <%= select_tag "metric[duration_hours]", options_for_select((0..23).to_a, 0) , class: "border-1 border-solid" %>hr
-        <%= select_tag "metric[duration_minutes]", options_for_select((0..59).to_a, 0), class: "border-1 border-solid" %>m
-        <%= select_tag "metric[duration_seconds]", options_for_select((0..59).to_a, 0), class: "border-1 border-solid" %>s
+        <div class="flex flex-row gap-3">
+          <%= select_tag "metric[duration_hours]", options_for_select((0..23).to_a, 0) , class: "input-accent" %>
+          <span class="inline">hr</span>
+          <%= select_tag "metric[duration_minutes]", options_for_select((0..59).to_a, 0), class: "input-accent" %>
+          <span class="inline">min</span>
+          <%= select_tag "metric[duration_seconds]", options_for_select((0..59).to_a, 0), class: "input-accent" %>
+          <span class="inline">sec</span>
+        </div>
       </div>
 
-      <div class="flex justify-between">
+      <div class= "<%= input_classes %>" >
         <%= form.label :distance %>
-        <%= form.text_field :distance, class: "border border-gray-300 pl-2" %>
-      </div>
-
-      <div class="rounded-sm shadow-lg text-center transition-transform hover:scale-110 border border-gray-300">
-        <%= form.button %>
+        <%= form.number_field :distance, step: "any", class: "input-accent pl-2" %>
       </div>
     </div>
-  <% end %>
-</div>
+
+    <%= form.button class: "btn-accent w-50 shadow-lg" %>
+  </div>
+<% end %>

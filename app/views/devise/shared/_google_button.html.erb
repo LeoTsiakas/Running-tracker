@@ -2,7 +2,7 @@
   <%= button_to "Sign in with Google",
               user_google_oauth2_omniauth_authorize_path,
               data: { turbo: false },
-              class: "w-full bg-white font-medium rounded-md p-2 text-center text-gray-800 cursor-pointer" %>
+              class: "w-full bg-white font-medium rounded-md p-2 text-center text-gray-800" %>
 
   <div class="absolute top-[12px] left-[10px] z-10">
     <%= render partial: "shared/google_icon" %>

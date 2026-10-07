@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+@theme static {
+  --color-running-tracker-blue-900: #071925;
+  --color-running-tracker-blue-800: #10293b;
+  --color-running-tracker-orange: #e64a00;
+  --font-display: "Oswald", sans-serif;
+}
+
+@layer base {
+  a[href],
+  button:not(:disabled),
+  input:where([type="submit"], [type="button"], [type="reset"]):not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility card {
+  @apply rounded-xl bg-running-tracker-blue-800 text-white;
+}
+
+@utility btn-accent {
+  @apply rounded-md bg-running-tracker-orange px-4 py-2 text-center font-medium text-running-tracker-blue-800 transition-transform hover:scale-105;
+}
+
+@utility input-accent {
+  @apply rounded-md border border-running-tracker-orange bg-running-tracker-blue-900 text-white placeholder:text-neutral-400 [color-scheme:dark];
+}

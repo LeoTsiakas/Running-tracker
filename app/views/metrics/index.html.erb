@@ -1,38 +1,46 @@
-<!-- datarangepicker does not exist in the npm registry, so we are using a CDN instead -->
-<script src="https://cdn.jsdelivr.net/gh/alumuko/vanilla-datetimerange-picker@latest/dist/vanilla-datetimerange-picker.js"></script>
+<div class="mt-5">
 
-<%= form_with url: metrics_path, method: :get do |form| %>
-  <div class="flex flex-wrap items-center gap-3">
-    <%= form.text_field :selected_date_range,
-                        value: params[:selected_date_range],
-                        placeholder: "Pick a date range",
-                        class: "min-w-64 flex-1 rounded-md border border-gray-300 bg-white px-3 py-2 text-black",
-                        data: { controller: "daterangepicker" } %>
-    
-    <%= form.submit "Filter",
-                    class: "cursor-pointer rounded-md bg-blue-400 px-4 py-2 text-black transition-transform hover:scale-110" %>
-              
-    <div class="cursor-pointer rounded-md bg-white px-4 py-2 text-black transition-transform hover:scale-110">
-      <%= link_to "Clear", root_path %>
+  <!-- datarangepicker does not exist in the npm registry, so we are using a CDN instead -->
+  <script src="https://cdn.jsdelivr.net/gh/alumuko/vanilla-datetimerange-picker@latest/dist/vanilla-datetimerange-picker.js"></script>
+
+  <%= form_with url: metrics_path, method: :get do |form| %>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-3">
+      <%= form.text_field :selected_date_range,
+                          value: params[:selected_date_range],
+                          placeholder: "Pick a date range",
+                          class: "rounded-md border border-gray-300 bg-white px-3 py-2 text-center text-black",
+                          data: { controller: "daterangepicker" } %>
+
+      <div class="flex gap-3">
+        <%= form.submit "Filter", class: "btn-accent" %>
+        <%= link_to "Clear", root_path, class: "btn-accent" %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag "metrics_page" do %>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mt-5">
+      <%= render @pagy_metrics %>
+    </div>
+
+    <div class="w-full flex flex-col items-center justify-center mt-3 gap-2">
+      <%= render "shared/pagy_info", pagy: @pagy %>
+
+      <%= render "shared/pagy_nav", pagy: @pagy, frame_id: "metrics_page" if @pagy.pages > 1 %>
+    </div>
+  <% end %>
+
+  Check Your Charts
+
+  <% chart_wrapper_class = "relative h-80 w-full bg-white p-4 rounded-md" %>
+
+  <div data-controller="bar-chart" data-bar-chart-metrics-value="<%= @metrics.to_json %>" class="flex flex-col gap-4 w-full max-w-[84rem] rounded-md mt-3">
+    <div class="<%= chart_wrapper_class %>">
+      <canvas data-bar-chart-target="timeCanvas"></canvas>
+    </div>
+
+    <div class="<%= chart_wrapper_class %>">
+      <canvas data-bar-chart-target="distanceCanvas"></canvas>
     </div>
   </div>
-<% end %>
-
-<%= turbo_frame_tag "metrics_page" do %>
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
-    <%= render @pagy_metrics %>
-  </div>
-
-  <div class="w-full flex flex-col items-center justify-center mt-3 gap-2">
-    <%= render "shared/pagy_info", pagy: @pagy %>
-
-    <%= render "shared/pagy_nav", pagy: @pagy, frame_id: "metrics_page" if @pagy.pages > 1 %>
-  </div>
-<% end %>
-
-Check Your Charts
-
-<div data-controller="bar-chart" data-bar-chart-metrics-value="<%= @metrics.to_json %>" class="flex flex-col gap-4 w-full max-w-[84rem] rounded-md mt-3">
-  <canvas data-bar-chart-target="timeCanvas" class="bg-white p-4 rounded-md"></canvas>
-  <canvas data-bar-chart-target="distanceCanvas" class="bg-white p-4 rounded-md"></canvas>
 </div>
