@@ -1,6 +1,6 @@
 class MetricsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_metric, only: %i[edit destroy]
+  before_action :set_metric, only: %i[destroy]
 
   def index
     date_range = params[:selected_date_range]
