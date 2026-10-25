@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  user_id: 1
   time: 1000
   distance: 1
+  date: <%= Date.today %>
 
 two:
+  user_id: 1
   time: 2000
   distance: 2
+  date: <%= Date.yesterday %>

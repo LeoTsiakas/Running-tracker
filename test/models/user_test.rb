@@ -50,4 +50,35 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
     assert_includes user.errors[:time_zone], "can't be blank"
   end
+
+  test 'normalizes an IANA time zone to its ActiveSupport name' do
+    user = build_user(time_zone: 'Europe/Athens')
+    user.valid?
+    assert_equal 'Athens', user.time_zone
+  end
+
+  test 'keeps a time zone that is already an ActiveSupport name' do
+    user = build_user(time_zone: 'Athens')
+    user.valid?
+    assert_equal 'Athens', user.time_zone
+  end
+
+  test 'normalizes a blank time zone to nil' do
+    user = build_user(time_zone: '   ')
+    user.valid?
+    assert_nil user.time_zone
+  end
+
+  test 'builds metric by registered_at' do
+    user = users(:one)
+    metric1 = metrics(:one)
+    metric2 = metrics(:two)
+
+    expected_hash = {
+      metric1.date.utc => metric1,
+      metric2.date.utc => metric2
+    }
+
+    assert_equal expected_hash, user.metrics_by_registered_at
+  end
 end

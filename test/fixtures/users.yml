@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   username: leo_ts
   email: leo_ts@example.com
 
 two:
+  id: 2
   username: john_doe
   email: john_doe@example.com
