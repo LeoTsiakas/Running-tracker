@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  time: MyString
+  time: 1000
   distance: 1
 
 two:
-  time: MyString
-  distance: 1
+  time: 2000
+  distance: 2
