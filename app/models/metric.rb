@@ -20,8 +20,6 @@ class Metric < ApplicationRecord
   validates :distance, numericality: { greater_than: 0 }
   validate :date_cannot_be_in_the_future
 
-  validates :distance, comparison: { greater_than: 0 }
-
   belongs_to :user
 
   scope :ordered, -> { order(date: :asc) }
