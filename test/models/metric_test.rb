@@ -60,4 +60,43 @@ class MetricTest < ActiveSupport::TestCase
   test 'is valid with a date in the past' do
     assert build_metric(date: 1.week.ago).valid?
   end
+
+  test 'is valid when the wall-clock date has already passed in the user time zone' do
+    travel_to Time.utc(2026, 10, 15, 12, 0) do
+      # 18:00 is still ahead in UTC, but in Tokyo (UTC+9) 18:00 was 09:00 UTC.
+      users(:one).time_zone = 'Tokyo'
+      assert build_metric(date: Time.utc(2026, 10, 15, 18, 0)).valid?
+    end
+  end
+
+  test 'is invalid when the wall-clock date is still ahead in the user time zone' do
+    travel_to Time.utc(2026, 10, 15, 12, 0) do
+      # 06:00 has passed in UTC, but in Hawaii (UTC-10) 06:00 is 16:00 UTC.
+      users(:one).time_zone = 'Hawaii'
+      metric = build_metric(date: Time.utc(2026, 10, 15, 6, 0))
+      assert_not metric.valid?
+      assert_includes metric.errors[:date], "can't be in the future"
+    end
+  end
+
+  test 'checks a future date in the app time zone when there is no user' do
+    travel_to Time.utc(2026, 10, 15, 12, 0) do
+      metric = build_metric(user: nil, date: Time.utc(2026, 10, 15, 13, 0))
+      assert_not metric.valid?
+      assert_includes metric.errors[:date], "can't be in the future"
+    end
+  end
+
+  test 'ordered returns metrics oldest first' do
+    assert_equal [metrics(:two), metrics(:one)], users(:one).metrics.ordered.to_a
+  end
+
+  test 'indexes the date in Typesense as epoch seconds so range filters can compare it' do
+    metric = build_metric(date: Time.utc(2026, 10, 1, 7, 30))
+
+    document = Metric.typesense_settings.get_attributes(metric)
+
+    assert_equal Time.utc(2026, 10, 1, 7, 30).to_i, document['date']
+    assert_equal({ 'user_id' => users(:one).id, 'time' => 2600, 'distance' => 5.0 }, document.except('date'))
+  end
 end
