@@ -2,7 +2,7 @@ class Metric < ApplicationRecord
   extend Pagy::Search
   include Typesense
 
-  typesense do
+  typesense per_environment: true do
     attributes :user_id, :time, :distance
     attribute(:date) { date.to_i }
 
