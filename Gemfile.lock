@@ -399,10 +399,10 @@ GEM
       faraday (>= 2.0)
       faraday-multipart (>= 1.0)
       hashie
-    tailwindcss-rails (4.0.0)
+    tailwindcss-rails (4.7.0)
       railties (>= 7.0.0)
       tailwindcss-ruby (~> 4.0)
-    tailwindcss-ruby (4.0.4-x86_64-linux-gnu)
+    tailwindcss-ruby (4.3.4-x86_64-linux-gnu)
     thor (1.5.0)
     timeout (0.4.3)
     tsort (0.2.0)
