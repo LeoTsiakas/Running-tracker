@@ -29,5 +29,10 @@ end
 module ActionDispatch
   class IntegrationTest
     include Devise::Test::IntegrationHelpers
+
+    # Rails 8 draws routes lazily on the first request, but Devise 4.9 builds its
+    # mappings while routes are drawn. Without this, `sign_in` before any request
+    # raises "Could not find a valid mapping" depending on test order.
+    setup { Rails.application.reload_routes_unless_loaded }
   end
 end
