@@ -52,7 +52,7 @@ class MetricsController < ApplicationController
   private
 
   def metrics_params
-    permitted = params.require(:metric).permit(:distance, :date)
+    permitted = params.expect(metric: %i[distance date])
 
     if params[:metric][:duration_hours] && params[:metric][:duration_minutes] && params[:metric][:duration_seconds]
       hours = params[:metric][:duration_hours].to_i
