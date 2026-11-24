@@ -25,7 +25,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   # TODO: replace with a real sender address before deploying (see ApplicationMailer).
-  config.mailer_sender = 'from@example.com'
+  config.mailer_sender = 'Running Tracker <no-reply@running-tracker.local>'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
