@@ -17,7 +17,7 @@ Rails 8.1 · Ruby 3.2.2 · SQLite · Hotwire (Turbo, Stimulus) with importmap ·
 
 - Ruby 3.2.2
 - Redis on `localhost:6379` (for Sidekiq)
-- Docker (runs Typesense)
+- Docker (runs Typesense and Mailpit)
 
 ## Setup
 
@@ -55,12 +55,16 @@ The app runs without these keys, but Google sign-in and the Strava import won't 
 Run each command in its own terminal:
 
 ```bash
-docker compose up typesense   # search server on :8108
-bin/dev                       # Rails server and Tailwind watcher on :3000
-bundle exec sidekiq           # background jobs and the Strava sync schedule
+docker compose up typesense mailpit   # search and local email
+bin/dev                               # Rails server and Tailwind watcher on :3000
+bundle exec sidekiq                   # background jobs and the Strava sync schedule
 ```
 
 Open <http://localhost:3000>. Use port 3000: the Strava redirect URI is hardcoded to it.
+
+### Email
+
+In development, emails go to Mailpit instead of real inboxes. Read them at <http://localhost:8025>, or preview them without sending at <http://localhost:3000/rails/mailers>.
 
 The Typesense connection defaults to `localhost:8108` with the API key `devkey`, matching `docker-compose.yml`. Override it with `TYPESENSE_HOST`, `TYPESENSE_PORT`, `TYPESENSE_PROTOCOL` and `TYPESENSE_API_KEY`.
 

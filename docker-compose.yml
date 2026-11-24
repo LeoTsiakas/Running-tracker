@@ -20,5 +20,12 @@ services:
       - typesense-data:/data
     command: '--data-dir /data --api-key=devkey --enable-cors'
 
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+
 volumes:
   typesense-data:
