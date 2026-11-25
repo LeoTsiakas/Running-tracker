@@ -10,7 +10,7 @@
     <div class="flex flex-col lg:flex-row gap-8">
       <div class= "<%= input_classes %>" >
         <%= form.label :date %>
-        <%= form.datetime_field :date, class: "input-accent px-2", max: Time.current.strftime("%Y-%m-%dT%H:%M") %>
+        <%= form.datetime_field :date, class: "input-accent px-2", max: Time.use_zone(current_user.time_zone) { Time.current } %>
       </div>
 
       <div class= "<%= input_classes %>" >
